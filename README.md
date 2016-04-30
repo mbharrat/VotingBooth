@@ -67,8 +67,9 @@ Voters can only register if they are "pre-registered", meaning their names and "
 
 **No one can determine for whom anyone else voted:** The CTF does not associate full names with validation numbers. When then results are published, only the random identification numbers are printed with their voting choices. Thus unless someone finds out another person's random identification number (which is outside of the security scope of this project), they cannot determine for whom that person voted.
 
-**No one can duplicate anyone elseâ€™s votes:** There is no way for someone to log in as another person in the CTF to view, change, or duplicate their votes. If someone has already "logged in" to vote, the CTF will disallow them to log in in again.
+**No one can duplicate anyone else’s votes:** There is no way for someone to log in as another person in the CTF to view, change, or duplicate their votes. If someone has already "logged in" to vote, the CTF will disallow them to log in in again.
 
 **Every voter can make sure that his vote has been taken into account in the final tabulation:** In the results page, the random identification numbers are printed under the party they voted for. So if a user has voted, he can make sure his vote has been taken into account by looking for his identification number under his voted party.
 
-**Everyone knows who voted and who didnâ€™t:** The results page also prints out a list of full names of people who have participated in the election (but they are not associated with whom they have voted for). Everyone will know who have voted and who have not by looking at this list.
+**Everyone knows who voted and who didn’t:** The results page also prints out a list of full names of people who have participated in the election (but they are not associated with whom they have voted for). Everyone will know who have voted and who have not by looking at this list.
+

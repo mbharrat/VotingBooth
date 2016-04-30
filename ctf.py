@@ -20,7 +20,7 @@ names = []
 def confirmation():
     if request.method == "POST":
         message = validate_voter(request.form["rand_id"], request.form["valid_num"], request.form["party"])
-        if "thanks" in message:
+        if "candidate" in message:
             request_voter_name(request.form["valid_num"])
         return jsonify(message = message)
 
