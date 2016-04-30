@@ -1,0 +1,52 @@
+<!DOCTYPE>
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>CLA - Voter Registration</title>
+      <script src="{{ url_for('static', filename='bower_components/webcomponentsjs/webcomponents-lite.min.js') }}"></script>
+      <link rel="import" href="{{ url_for('static', filename='bower_components/polymer/polymer.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/paper-toolbar/paper-toolbar.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/paper-input/paper-input.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/paper-toast/paper-toast.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/paper-fab/paper-fab.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/iron-form/iron-form.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/iron-icon/iron-icon.html') }}">
+      <link rel="import" href="{{ url_for('static', filename='bower_components/iron-icons/iron-icons.html') }}">
+      <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body class="fullbleed layout vertical">
+        <template is="dom-bind" id="app">
+            <paper-toolbar class="layout horizontal">
+                <h1>Central Legitimization Agency (CLA)</h1>
+            </paper-toolbar>
+            <p class="header">Welcome Hola!</p>
+            <img id="house" src="/static/house.png">
+            <form id="form" is="iron-form" action="/validation" method="post" class="layout vertical flex around-justified" on-iron-form-response="handleSuccess" on-iron-form-error="handleError">
+                <paper-input type="text" name="first" id="right-label" label="First Name"></paper-input>
+                <paper-input type="text" name="last" id="right-label" Label="Last Name"></paper-input>
+                <paper-input type="password" name="secret" id="right-label" Label="Your personal identification number"></paper-input>
+                <paper-fab icon="check" onclick="submitForm()"></paper-fab>
+            </form>
+            <paper-toast id="Status" duration="0" text="[[Message]]">
+                <paper-button onclick="Status.toggle();window.location='http://localhost:8080'" class="yellow-button">Close now!</paper-button>
+            </paper-toast>
+        </template>
+        <style is="custom-style">
+            body,html,head {margin:0;padding:0;border:0}
+            h1 {color:white;font-size: 2em;font-family: "Poiret One";width:100%;text-align:center}
+            .Btn-Holder {width: 90%;max-width:50em}
+            paper-fab {position:absolute;bottom:2vh;right:2vw}
+            p.header {font-style: italic;text-align: center;font-size: 1.1em}
+            #form {min-width: 48em;margin: auto;width: 90%;}
+            .yellow-button {text-transform: none;color: #eeff41}
+            #house {margin: auto;display: block;height: 19em}
+        </style>
+        <script>
+            const t = document.querySelector("#app")
+            t.handleSuccess = e => {t.Message = e.detail.response.message;t.$.Status.open()}
+            function submitForm() {t.$.form.submit()}
+        </script>
+    </body>
+</html>

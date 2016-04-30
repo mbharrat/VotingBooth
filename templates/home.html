@@ -1,0 +1,47 @@
+<!DOCTYPE>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Election Booth</title>
+  <script src="{{ url_for('static', filename='bower_components/webcomponentsjs/webcomponents-lite.min.js') }}"></script>
+  <link rel="import" href="{{ url_for('static', filename='bower_components/polymer/polymer.html') }}">
+  <link rel="import" href="{{ url_for('static', filename='bower_components/iron-flex-layout/classes/iron-flex-layout.html') }}">
+  <link rel="import" href="{{ url_for('static', filename='bower_components/paper-toolbar/paper-toolbar.html') }}">
+  <link rel="import" href="{{ url_for('static', filename='bower_components/paper-button/paper-button.html') }}">
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="fullbleed layout vertical">
+    <template is="dom-bind" id="app">
+        <paper-toolbar class="layout horizontal">
+            <h1>Virtual Election Booth</h1>
+        </paper-toolbar>
+        <div class="layout vertical flex center-center">
+            <section class="Btn-Holder layout horizontal around-justified">
+                <a href$="[[RegSite]]" target="_blank"><paper-button>Register</paper-button></a>
+                <a href$="[[ternary(reg,VoteSite,'#Not_Yet')]]" target="[[ternary(reg,'_blank','')]]"><paper-button disabled="[[!reg]]">Vote</paper-button></a>
+                <a href$="[[ternary(election_end,ResultsSite,'#Not_Yet')]]" target="[[ternary(election_end,'_blank','')]]"><paper-button disabled="[[!election_end]]">Results</paper-button></a>
+            </section>
+          </ul>
+        </div>
+    </template>
+    <style is="custom-style">
+        body,html,head {margin:0;padding:0;border:0}
+        h1 {color:white;font-size: 2em;font-family: "Poiret One"}
+        .Btn-Holder {width: 90%;max-width:50em}
+        paper-button {background-color: #3F51B5;padding:1.5em .5em;width:11em;color: white}
+        paper-button[disabled] {background-color: #9E9E9E}
+    </style>
+    <script>
+        const True = true, False = false
+        var t = document.querySelector("#app")
+        t.ternary = (a,b,c) => a?b:c
+        t.RegSite = "https://localhost:8091"
+        t.VoteSite = "https://localhost:8090"
+        t.ResultsSite = t.VoteSite + "/results"
+        t.reg = {{reg_end}}
+        t.election_end = {{elec_end}}
+    </script>
+</body>
+</html>

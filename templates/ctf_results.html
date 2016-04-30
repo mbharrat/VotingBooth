@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTF - Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}">
+</head>
+
+<body>
+  <div class="row"><div class="small-12 columns">
+    <h1>Election Results</h1>
+    <h3>Final Results</h3>
+    <table>
+      <thead><tr>
+          <th width="150">Tea Party</th>
+          <th width="150">Democratic Party</th>
+          <th width="150">Republican Party</th>
+      </tr></thead>
+      <tbody><tr>
+          <td>{{ votes["tea"] }}</td>
+          <td>{{ votes["dem"] }}</td>
+          <td>{{ votes["rep"] }}</td>
+      </tr></tbody>
+    </table>
+
+    <h3>Voters Breakdown</h3>
+    <div class="row">
+
+    <div class="small-4 columns"><table>
+      <thead><tr><th width="150">Tea Party</th></tr></thead>
+      <tbody>
+        {% for voter in voters %}
+          {% if voters[voter]["vote"] == "tea" %}
+            <tr><td>{{ voter }}</td></tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table></div>
+
+    <div class="small-4 columns"><table>
+      <thead><tr><th width="150">Democratic Party</th></tr></thead>
+      <tbody>
+        {% for voter in voters %}
+          {% if voters[voter]["vote"] == "dem" %}
+            <tr><td>{{ voter }}</td></tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table></div>
+
+    <div class="small-4 columns"><table>
+      <thead><tr><th width="150">Republican Party</th></tr></thead>
+      <tbody>
+        {% for voter in voters %}
+          {% if voters[voter]["vote"] == "rep" %}
+            <tr><td>{{ voter }}</td></tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table></div>
+    </div>
+
+    <h3>Names of Voters</h3>
+    <table>
+      <tbody><tr>
+        {% for name in names %}
+          <tr><td>{{ name }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div></div>
+</body>
+</html>
