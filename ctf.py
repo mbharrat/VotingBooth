@@ -1,5 +1,5 @@
 from base64 import b64encode, b64decode
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from OpenSSL import SSL
 from Crypto.Signature import PKCS1_PSS as PKCS
 from Crypto.Hash import SHA
@@ -13,7 +13,7 @@ ctf = Flask(__name__)
 
 voters = {}
 valid_nums = {}
-votes = {"democrats": 0, "repubs": 0}
+votes = {"bernie": 0, "hillary": 0}
 names = []
 
 @ctf.route("/confirmation", methods=["POST"])
@@ -22,7 +22,7 @@ def confirmation():
         message = validate_voter(request.form["rand_id"], request.form["valid_num"], request.form["party"])
         if "thanks" in message:
             request_voter_name(request.form["valid_num"])
-        return render_template("ctf_confirmation.html", message = message)
+        return jsonify(message = message)
 
 @ctf.route("/get_votername", methods=["POST"])
 def get_votername():
@@ -94,8 +94,8 @@ def validate_voter(rand_id, valid_num, vote):
             repeated = True
 
     if allowed == True:
-        lookup = {"democrats":"Democratic","repubs":"Republican"}
-        return "Vote from user: "+rand_id+" accepted for the "+lookup.get(vote)+" party!"
+        lookup = {"bernie":"Bernie Sanders","hillary":"Hillary Clinton"}
+        return "Voter ["+rand_id+"] voted for "+lookup.get(vote)+" as their candidate!"
     elif repeated == True:
         return "You have already voted."
     else:
