@@ -12,12 +12,7 @@ context = ("keys/cfa.crt","keys/cfa.key")
 cla = Flask(__name__)
 
 # list of eligible voters
-eligible_voters = {"100":["Kartik", "Chopra", False],
-                    "200":["Vicki", "Shen", False],
-                    "300":["Steph", "Yang", False],
-                    "400":["Grace", "Chi", False],
-                    "500":["Janice", "Tsai", False],
-                    "600":["Yamini", "Kathari", False],
+eligible_voters = {"100":["Kartik", "Chopra", False]
                  }
 @cla.route("/")
 def main():
