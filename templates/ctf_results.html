@@ -1,5 +1,5 @@
 <!DOCTYPE>
-<html class="no-js" lang="en">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,6 +17,7 @@
         <link rel="import" href="{{ url_for('static', filename='bower_components/iron-icon/iron-icon.html') }}">
         <link rel="import" href="{{ url_for('static', filename='bower_components/iron-icons/iron-icons.html') }}">
         <link rel="import" href="{{ url_for('static', filename='bower_components/iron-flex-layout/classes/iron-flex-layout.html') }}">
+        <link rel="import" href="{{ url_for('static', filename='bower_components/highcharts-chart/highcharts-chart.html') }}">
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     </head>
     <body class="fullbleed layout vertical">
@@ -25,29 +26,32 @@
                 <h1>Election Results</h1>
             </paper-toolbar>
             <section class="Main-Wrapper flex layout vertical around-justified center">
-                <header>
-                    <h3>Final Results</h3>
-                    <table>
-                        <thead><tr>
-                            <th>Bernie Sanders</th>
-                            <th>Hillary Clinton</th>
-                        </tr></thead>
-                        <tbody><tr>
-                            <td>{{votes["bernie"]}}</td>
-                            <td>{{votes["hillary"]}}</td>
-                        </tr></tbody>
-                    </table>
+                <header class="layout horizontal center-center">
+                    <article class="flex">
+                        <h3>Final Results</h3>
+                        <table>
+                            <thead><tr>
+                                <th>Bernie Sanders</th>
+                                <th>Hillary Clinton</th>
+                            </tr></thead>
+                            <tbody><tr>
+                                <td>{{votes["bernie"]}}</td>
+                                <td>{{votes["hillary"]}}</td>
+                            </tr></tbody>
+                        </table>
+                        <h3>Names of Voters</h3>
+                        <table>
+                          <tbody><tr>
+                            {% for name in names %}
+                              <tr><td>{{ name }}</td></tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                    </article>
+                    <article class="flex">
+                        <highcharts-chart id="chart" color-by-point type="pie" title data='[["Bernie",{{votes["bernie"]}}],["Hillary",{{votes["hillary"]}}]]' label="Votes"></highcharts-chart>
+                    </article>
                 </header>
-                <footer>
-                    <h3>Names of Voters</h3>
-                    <table>
-                      <tbody><tr>
-                        {% for name in names %}
-                          <tr><td>{{ name }}</td></tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                </footer>
             </section>
         <style is="custom-style">
             body,html,head {margin:0;padding:0;border:0}
@@ -59,6 +63,16 @@
             #form {max-width: 48em;margin: 0 auto;width: 90%;}
             .yellow-button {text-transform: none;color: #eeff41}
             .Main-Wrapper {padding: 6em 1em}
+            highcharts-chart {min-height: initial;height: 18em}
         </style>
+        <style>
+            highcharts-chart > div {height: 100%}
+        </style>
+        <script>
+            const t = document.querySelector("#app")
+            window.addEventListener('WebComponentsReady', function(e) {
+                t.async(_ => t.$.chart.resizeChart(),150)
+            })
+        </script>
     </body>
 </html>
