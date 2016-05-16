@@ -11,7 +11,8 @@ cla = Flask(__name__)
 eligible_voters = {
     "100":["Kartik", "Chopra", False],
     "111":["AP", "V", False],
-    "200":["John", "Doe", False]
+    "200":["John", "Doe", False],
+    "300":["Devina", "Bharrat", False]
 }
 @cla.route("/")
 def main():
